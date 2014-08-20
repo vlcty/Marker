@@ -18,10 +18,11 @@ sub main {
 
 		foreach my $current ( @toHighlight ) {
 			if ( $line =~ m/($current)/ig ) {
-				my $found = $1;
+				my $found = quotemeta($1);
 				my $colored = colored($found,$color);
 
 				$line =~ s/$found/$colored/;
+				$line =~ s/\\//ig;
 			}
 		}
 
