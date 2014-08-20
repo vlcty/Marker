@@ -17,8 +17,12 @@ sub main {
 		chomp($line);
 
 		foreach my $current ( @toHighlight ) {
-			my $colored = colored($current,$color);
-			$line =~ s/$current/$colored/ig;
+			if ( $line =~ m/($current)/ig ) {
+				my $found = $1;
+				my $colored = colored($found,$color);
+
+				$line =~ s/$found/$colored/;
+			}
 		}
 
 		print("$line\n");
